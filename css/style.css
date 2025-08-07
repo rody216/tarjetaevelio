@@ -1,0 +1,469 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .card-container {
+            perspective: 1200px;
+            width: 420px;
+            height: 280px;
+        }
+
+        .card-flip {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .card-flip.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #000000, #2d2d2d);
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 40px rgba(255, 215, 0, 0.1),
+                0 0 20px rgba(255, 215, 0, 0.05),
+                inset 0 1px 0 rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            padding: 25px;
+            backface-visibility: hidden;
+            overflow: hidden;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            margin: -10px auto 10px auto; /* Subido 10px */
+            display: block;
+            filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
+            border-radius: 50%;
+        }
+
+        @keyframes fadeInIcon {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        }
+    }
+
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .card-face::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.03), transparent);
+            transform: rotate(-45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .card-face:hover::before {
+            opacity: 1;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(-45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(-45deg); }
+        }
+
+        .card-face:hover {
+            box-shadow: 
+                0 30px 60px rgba(255, 215, 0, 0.2),
+                0 0 30px rgba(255, 215, 0, 0.1),
+                inset 0 1px 0 rgba(255, 215, 0, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .card-back .header {
+            margin-bottom: 15px;
+        }
+
+        .name {
+            font-size: 26px;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.5),
+                0 0 20px rgba(255, 215, 0, 0.3);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        .profession {
+            font-size: 16px;
+            color: #FFD700;
+            font-weight: 600;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .slogan {
+            font-size: 13px;
+            color: #FFD700;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3); }
+            to { text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.5); }
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #FFD700;
+            text-decoration: none;
+            padding: 2px 2px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-size: 13px;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .contact-item:hover::before {
+            left: 100%;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(3px);
+        }
+
+        .contact-icon {
+            width: 18px;
+            height: 18px;
+            fill: #FFD700;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
+            flex-shrink: 0;
+        }
+
+        .social-networks {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 5px;
+            margin-bottom: 5%;
+        }
+
+        .website-section {
+            margin-top: 5px;
+        }
+
+        .website-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1px;
+            padding: 7px 7px;
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.1));
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 15px;
+            text-decoration: none;
+            color: #FFD700;
+            font-size: 13px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .website-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .website-button:hover::before {
+            left: 100%;
+        }
+
+        .website-button:hover {
+            transform: translateY(-2px) scale(1.02);
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.15));
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 
+                0 8px 20px rgba(255, 215, 0, 0.3),
+                0 0 15px rgba(255, 215, 0, 0.2);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .website-icon {
+            width: 20px;
+            height: 20px;
+            fill: #FFD700;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
+            transition: all 0.3s ease;
+        }
+
+        .website-button:hover .website-icon {
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .website-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .website-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        .website-button:hover .website-glow {
+            width: 100px;
+            height: 100px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 10px;
+        }
+
+        /* Efectos hover específicos para cada red social */
+        .facebook:hover::before {
+            background: linear-gradient(145deg, #1877F2, #166FE5);
+            opacity: 1;
+        }
+
+        .whatsapp:hover::before {
+            background: linear-gradient(145deg, #25D366, #128C7E);
+            opacity: 1;
+        }
+
+        .instagram:hover::before {
+            background: linear-gradient(145deg, #E4405F, #833AB4, #F77737);
+            opacity: 1;
+        }
+
+        .linkedin:hover::before {
+            background: linear-gradient(145deg, #0A66C2, #004182);
+            opacity: 1;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            fill: #FFD700;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-link:hover .social-icon {
+            fill: white;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+        }
+
+        .decorative-corner {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .corner-top-left {
+            top: 12px;
+            left: 12px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 12px 0 0 0;
+        }
+
+        .corner-bottom-right {
+            bottom: 12px;
+            right: 12px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 12px 0;
+        }
+
+        .flip-indicator {
+            position: absolute;
+            bottom: 1px;
+            right: 15px;
+            color: rgba(255, 215, 0, 0.5);
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        .flip-button {
+        background: none;
+        border: 2px solid transparent;
+        color: #FFD700; /* dorado */
+        font-size: 0.7rem;
+        font-weight: bold;
+        cursor: pointer;       
+        margin-top: 0.5rem;
+        transition: color 0.3s, border-color 0.3s;
+        text-transform: uppercase;        
+        position: relative;
+        z-index: 2;
+        }
+
+        .flip-button.front {
+        margin-left: 180px;
+        margin-top: 0.7rem;   /* o lo que ya hayas definido */
+        transform: translateY(-3px);  /* si quieres moverlo arriba */
+        }
+
+
+        .flip-button:hover {
+        font-size: 0.9rem;
+        
+        }
+
+
+        .address-section {
+            margin-top: 4px;
+        }
+
+        .address-title {
+            color: #FFD700;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 2px;
+            text-align: center;
+        }
+
+        .address-text {
+            color: #FFD700;
+            font-size: 11px;
+            text-align: center;
+            line-height: 1.3;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 480px) {
+            .card-container {
+                width: 350px;
+                height: 250px;
+            }
+            
+            .name {
+                font-size: 22px;
+            }
+            
+            .profession {
+                font-size: 14px;
+            }
+            
+            .contact-item {
+                font-size: 12px;
+            }
+            
+            .social-networks {
+                gap: 8px;
+            }
+            
+            .social-link {
+                padding: 6px;
+            }
+            
+            .social-icon {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .website-button {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+            
+            .website-icon {
+                width: 14px;
+                height: 14px;
+            }
+        }
