@@ -60,11 +60,11 @@
         }
 
         @keyframes fadeInIcon {
-    to {
+        to {
         opacity: 1;
         transform: translateY(0);
         }
-    }
+        }
 
 
         .card-back {
@@ -427,6 +427,19 @@
         }
 
         @media (max-width: 480px) {
+
+            .flip-button.front {
+            margin-top: 0.1rem;
+            transform: translateY(-2px);
+            font-size: 0.65rem;
+            }
+
+        .flip-button.front {
+            margin-left: 150px;
+            margin-right: 0;
+         }
+
+    
             .card-container {
                 width: 350px;
                 height: 250px;
@@ -449,7 +462,7 @@
             }
             
             .social-link {
-                padding: 6px;
+                padding: 3px;
             }
             
             .social-icon {
